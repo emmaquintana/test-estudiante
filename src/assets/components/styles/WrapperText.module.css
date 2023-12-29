@@ -1,0 +1,3 @@
+.wrapperText > * {
+    font-size: clamp(1.5em, 2.5vw, 5em);    
+}

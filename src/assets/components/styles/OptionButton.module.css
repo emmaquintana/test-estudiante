@@ -1,0 +1,31 @@
+.optionButton {    
+    min-width: 30em;
+    max-width: 50em;
+    padding: .6em 2em;
+    border-radius: 9999px;
+    cursor: pointer;     
+    background-color: #fff;        
+    transition: transform .2s;    
+}
+
+.optionButton:active {
+    transform: scale(.9);
+}
+
+.isSelected {
+    color: rgb(0, 180, 0);
+    filter: drop-shadow(0 0 15px 0 rgb(0, 180, 0));    
+}
+
+.childrenContainer {
+    display: grid;
+    grid-template-columns: auto 1fr;    
+    grid-template-rows: auto;
+    align-items: center;
+    gap: 1em;    
+}
+
+.checkIcon {
+    height: 2em;
+    width: 2em;           
+}

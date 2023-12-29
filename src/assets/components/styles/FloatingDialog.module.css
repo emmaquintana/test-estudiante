@@ -1,0 +1,13 @@
+.container {    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    gap: 1em;
+    background-color: rgb(255, 86, 86);
+    padding: .5em;
+    color: #fff;
+    border-radius: 10px;
+    font-size: clamp(1em, 2vw, 1.4em);
+    z-index: 5;
+}

@@ -1,0 +1,13 @@
+.nextButton {
+    padding: 1rem;
+    border-radius: 9999px;
+    background: rgb(200,200,200);
+    color: rgb(65,65,65);    
+    border: 0;
+    transition: background .2s;
+    cursor: pointer;
+    transform: scale(1.5);    
+}
+
+.nextButton:hover { background: rgb(175,175,175); }
+.nextButton:active { background: rgb(150,150,150); }

@@ -1,0 +1,31 @@
+.pulse { animation: pulse infinite 2s }
+.fadeAppear { animation: fadeAppear 1s forwards; }
+.fadeDisappear { animation: fadeDisappear 1s forwards; }
+.shake { animation: shake 500ms infinite }
+
+@keyframes pulse {
+    0% { scale: 1; }
+    50% { scale: .9; }
+    100% { scale: 1; }
+}
+
+@keyframes fadeAppear {
+    0% { filter: opacity(0); }
+    100% { filter: opacity(1); }
+}
+
+@keyframes fadeDisappear {
+    0% { filter: opacity(1); }
+    100% { filter: opacity(0); }
+}
+
+@keyframes shake {
+
+    0%,
+    100% { transform: translateX(0); }
+
+    25%,
+    75% { transform: translateX(-7px); }
+
+    50% { transform: translateX(7px); }
+}

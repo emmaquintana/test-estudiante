@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100dvh;
+    width: 100dvw;
+    padding: 5rem;    
+}
+
+.optionButtonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;    
+    gap: 1em;
+    height: 100%;    
+    margin: 1em;        
+}
+
+.optionButtons {
+    width: 100%;
+    line-height: 2em;
+    letter-spacing: .015em;    
+}
+
+.controlButtonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    gap: 2em;
+}
+
+.floatingDialogContainer {
+    position: absolute;
+    bottom: 2em;
+    left: 2em;
+}
+
+.questionTitle, .questionDesc { text-align: center; }
+.questionTitle { font-weight: bold; }
+.questionDesc { font-weight: 200; margin-top: 6px; }
+
+@media screen and (max-height: 650px) {    
+    .container { min-height: 600px; }
+}
+
+@media screen and (max-width: 780px) {
+    .floatingDialogContainer {
+        bottom: 1em;
+        left: auto;
+    }
+}
