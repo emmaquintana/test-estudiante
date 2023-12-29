@@ -56,6 +56,15 @@ export default function Home() {
         return options;
     }    
 
+    /**Return a FloatingDialog component*/
+    function showFloatingDialog(msg: String, dur: number) {        
+        return (
+            <>                                                
+                <FloatingDialog>{msg}</FloatingDialog>                                
+            </>                        
+        );
+    }
+
     /**Handles the test when next button is clicked*/
     function handleNextClick() {                
         if (selectedOption) {
@@ -70,8 +79,8 @@ export default function Home() {
                 setQuestionId(questionId + 1);
                 setSelectedOption(null);
             }                        
-            else {                
-                // End of the test: Goes to the test's result
+            else {
+                // End of the test: Goes to the test's result                
             }                
         }
         else {
@@ -139,10 +148,8 @@ export default function Home() {
                 {score}
             </div>            
             <div className={styles.floatingDialogContainer}>
-                {/*A message is displayed when the user press the next 
-                button and an option was not selected*/}
                 {isFloatingMessageDisplayed && 
-                    <FloatingDialog>Selecciona una opción</FloatingDialog>
+                    showFloatingDialog('Selecciona una opcion', 2000)
                 }            
             </div>
             
