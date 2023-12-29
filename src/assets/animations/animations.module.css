@@ -1,7 +1,7 @@
 .pulse { animation: pulse infinite 2s }
 .fadeAppear { animation: fadeAppear 500ms forwards; }
 .fadeDisappear { animation: fadeDisappear 500ms forwards; }
-.shake { animation: shake 500ms infinite }
+.shake { animation: shake 500ms forwards }
 .rotate { animation: rotate 1.5s infinite linear }
 
 @keyframes pulse {
