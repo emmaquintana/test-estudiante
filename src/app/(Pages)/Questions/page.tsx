@@ -139,7 +139,9 @@ export default function Home() {
                 {score}
             </div>            
             <div className={styles.floatingDialogContainer}>
-                <FloatingDialog>Selecciona una opcion</FloatingDialog>          
+                {isFloatingMessageDisplayed && 
+                    <FloatingDialog>Selecciona una opcion</FloatingDialog>          
+                }                
             </div>
             
         </section>
