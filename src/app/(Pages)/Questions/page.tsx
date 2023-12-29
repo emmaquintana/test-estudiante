@@ -8,6 +8,7 @@ import styles from './page.module.css';
 import animations from '@/assets/animations/animations.module.css'
 import WrapperText from '@/assets/components/WrapperText';
 import FloatingDialog from '@/assets/components/FloatingDialog';
+import { useRouter } from 'next/navigation';
 
 /*
 The following test works with a score model.
@@ -21,6 +22,7 @@ export default function Home() {
     const [score, setScore] = useState(0);        
     const [isFloatingMessageDisplayed, setIsFloatingMessageDisplayed] = useState(false);
     const refShake = useRef<HTMLBodyElement>(null);    
+    const router = useRouter();
 
     /**Handles which's the selected button for apply styles and logic*/
     function handleSelectedButton(id: number) {
@@ -72,6 +74,7 @@ export default function Home() {
             }                        
             else {
                 // End of the test: Goes to the test's result                
+                router.push("Questions/Result");
             }                
         }
         else {
