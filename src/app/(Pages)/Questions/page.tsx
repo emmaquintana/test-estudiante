@@ -19,15 +19,14 @@ classifications, there's a score (number type)
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [questionId, setQuestionId] = useState(0);
-    const [score, setScore] = useState(0);        
+    const [score, setScore] = useState(0);
     const [isFloatingMessageDisplayed, setIsFloatingMessageDisplayed] = useState(false);
-    const refShake = useRef<HTMLBodyElement>(null);    
+    const sectionRef = useRef<HTMLBodyElement>(null);
     const router = useRouter();
 
     /**Handles which's the selected button for apply styles and logic*/
     function handleSelectedButton(id: number) {
-        setSelectedOption(id);
-        console.log(id)
+        setSelectedOption(id);        
     }
 
     /**Returns current desc question*/
@@ -45,7 +44,7 @@ export default function Home() {
                     id={option.id}
                     key={option.id}
                     onClick={handleSelectedButton}
-                    className={`${styles.optionButtons}`} 
+                    className={`${styles.optionButtons}`}
                     isSelected={selectedOption === option.id}
                 >
                     <h2>
@@ -56,62 +55,84 @@ export default function Home() {
         });
 
         return options;
-    }    
+    }
 
     /**Handles the test when next button is clicked*/
-    function handleNextClick() {                
-        if (selectedOption) {
+    function handleNextClick() {
+        if (selectedOption && sectionRef.current) {
             // If there's a selected option, the score updates itself.
             updateScore();
 
-            //Floating message disappear if was displayed.
+            // Floating message disappear if was displayed previously.
             setIsFloatingMessageDisplayed(false);
-            
-            if (questionId !== Questions.length - 1) {
-                // Goes to the next question
-                setQuestionId(questionId + 1);
-                setSelectedOption(null);
-            }                        
-            else {
-                // End of the test: Goes to the test's result                
-                router.push("Questions/Result");
-            }                
+
+            // Handles animation
+            sectionRef.current.classList.remove(animations.fadeAppear);
+            sectionRef.current.classList.add(animations.fadeDisappear);
+
+            sectionRef.current.addEventListener('animationend', () => {
+                if (questionId !== Questions.length - 1) {
+                    // Goes to the next question                                
+                    setQuestionId(questionId + 1);
+                    setSelectedOption(null);
+                }
+                else {
+                    // End of the test: Goes to the test's result                                 
+                    // It works. I don't know how
+                    setScore((prevScore) => {                        
+                        router.push(`Questions/Result?score=${prevScore}`);
+                        return prevScore;
+                    });                    
+                }
+            }, {once: true});
+          
+            // Handles animation. Fade out doesn't remove if it's the last question
+            if (questionId !== Questions.length - 1) {                
+                
+                sectionRef.current.addEventListener('animationend', () => {
+                    sectionRef.current?.classList.remove(animations.fadeDisappear);            
+                }, {once: true});                
+
+                sectionRef.current.addEventListener('animationend', () => {
+                    sectionRef.current?.classList.add(animations.fadeAppear);                                
+                }, {once: true});                                    
+            }            
         }
         else {
             // if there's no a selected option, then a shake animation
             // is activated during 500ms. 
             // Also, a floating dialog message is displayed.
-            if (refShake.current) {                
-                refShake.current.classList.add(animations.shake);
+            if (sectionRef.current) {
+                sectionRef.current.classList.add(animations.shake);
 
                 setTimeout(() => {
-                    if (refShake.current) {                        
-                        refShake.current.classList.remove(animations.shake);
-                    }                    
+                    if (sectionRef.current) {
+                        sectionRef.current.classList.remove(animations.shake);
+                    }
                 }, 500);
-            }                  
+            }
             setIsFloatingMessageDisplayed(true)
-        } 
-    }    
+        }
+    }
 
     /** Process score */
-    function updateScore() {                
+    function updateScore() {
         if (selectedOption) {
             setScore((prevScore) => {
                 const selectedOptionObj = Questions[questionId].options?.[selectedOption - 1];
-    
+
                 if (selectedOptionObj && 'score' in selectedOptionObj) {
                     const scoreToAdd = selectedOptionObj.score as number;
                     return prevScore + scoreToAdd;
                 }
-    
+
                 return prevScore;
-            });                    
-        }                
-    }
+            });
+        }
+    }    
 
     return (
-        <section className={`${styles.container} ${animations.fadeAppear}`} ref={refShake}>
+        <section className={`${styles.container} ${animations.fadeAppear}`} ref={sectionRef}>
             <div>
                 <WrapperText>
                     <h2 className={styles.questionTitle}>
@@ -124,29 +145,16 @@ export default function Home() {
             </div>
             <div className={styles.optionButtonsContainer}>
                 {getOptions()}
-            </div>            
-            <NextButton                    
-                pulseAnimation
-                onClick={handleNextClick}      
-            />
-            <div
-                style={{
-                    position: 'fixed',
-                    bottom: '15px',
-                    right: '15px',
-                    height: '50px',
-                    width: '50px',
-                    fontSize: '30px'
-                }}
-            >
-                {score}
-            </div>            
-            <div className={styles.floatingDialogContainer}>
-                {isFloatingMessageDisplayed && 
-                    <FloatingDialog>Selecciona una opcion</FloatingDialog>          
-                }                
             </div>
-            
+            <NextButton
+                pulseAnimation
+                onClick={handleNextClick}
+            />
+            <div className={styles.floatingDialogContainer}>
+                {isFloatingMessageDisplayed &&
+                    <FloatingDialog>Selecciona una opcion</FloatingDialog>
+                }
+            </div>
         </section>
     )
 }

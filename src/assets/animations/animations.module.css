@@ -1,6 +1,6 @@
 .pulse { animation: pulse infinite 2s }
-.fadeAppear { animation: fadeAppear 1s forwards; }
-.fadeDisappear { animation: fadeDisappear 1s forwards; }
+.fadeAppear { animation: fadeAppear 500ms forwards; }
+.fadeDisappear { animation: fadeDisappear 500ms forwards; }
 .shake { animation: shake 500ms infinite }
 
 @keyframes pulse {
@@ -10,13 +10,13 @@
 }
 
 @keyframes fadeAppear {
-    0% { filter: opacity(0); }
-    100% { filter: opacity(1); }
+    0% { opacity: 0; }
+    100% { opacity: 1 }
 }
 
 @keyframes fadeDisappear {
-    0% { filter: opacity(1); }
-    100% { filter: opacity(0); }
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 @keyframes shake {

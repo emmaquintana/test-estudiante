@@ -29,14 +29,16 @@
 
 .btn {
     padding: .4em;
+    margin-top: .5em;
     background-color: #000;
     color: #fff;
     font-weight: 600;
-    font-size: 1.5em;
-    border-radius: 10px;
+    font-size: 1.4em;
+    border-radius: 9999px;
     border: 2px solid #000;
     cursor: pointer;
     transition: .2s transform, .2s filter, .2s outline;
+    text-decoration: none;
 }
 
 .btn:active {
