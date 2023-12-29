@@ -103,13 +103,11 @@ export default function Home() {
             // is activated during 500ms. 
             // Also, a floating dialog message is displayed.
             if (sectionRef.current) {
-                sectionRef.current.classList.add(animations.shake);
+                sectionRef.current.classList.add(animations.shake);                
 
-                setTimeout(() => {
-                    if (sectionRef.current) {
-                        sectionRef.current.classList.remove(animations.shake);
-                    }
-                }, 500);
+                sectionRef.current.addEventListener('animationend', () => {
+                    sectionRef.current?.classList.remove(animations.shake);
+                }, {once: true});                
             }
             setIsFloatingMessageDisplayed(true)
         }
