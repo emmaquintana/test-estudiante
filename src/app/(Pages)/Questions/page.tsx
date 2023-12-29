@@ -56,15 +56,6 @@ export default function Home() {
         return options;
     }    
 
-    /**Return a FloatingDialog component*/
-    function showFloatingDialog(msg: String, dur: number) {        
-        return (
-            <>                                                
-                <FloatingDialog>{msg}</FloatingDialog>                                
-            </>                        
-        );
-    }
-
     /**Handles the test when next button is clicked*/
     function handleNextClick() {                
         if (selectedOption) {
@@ -148,9 +139,7 @@ export default function Home() {
                 {score}
             </div>            
             <div className={styles.floatingDialogContainer}>
-                {isFloatingMessageDisplayed && 
-                    showFloatingDialog('Selecciona una opcion', 2000)
-                }            
+                <FloatingDialog>Selecciona una opcion</FloatingDialog>          
             </div>
             
         </section>
