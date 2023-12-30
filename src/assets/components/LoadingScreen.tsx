@@ -12,7 +12,7 @@ export default function LoadingScreen() {
             <CgSpinner 
                 className={animations.rotate} 
                 style={{
-                    fontSize: '10vw',
+                    fontSize: '12vh',
                     color: 'black'
                 }}
             />            
