@@ -44,7 +44,3 @@
 .btn:active {
     transform: scale(1.075);
 }
-
-.btn:hover {
-    outline: 2px solid rgb(0,255,0);
-}
