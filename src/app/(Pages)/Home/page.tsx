@@ -13,22 +13,24 @@ import removeChildren from '@/assets/util/RemoveChildren';
 export default function Home() {                
 
     const sectionRef = useRef<HTMLBodyElement>(null);
+    const titleContainerRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
 
     function handleClick() {
-        if (sectionRef.current) {
-            // Disappear all section's element with a FadeInToOut animation
-            sectionRef.current.classList.add(animations.fadeDisappear);            
-
+        if (sectionRef.current && titleContainerRef.current) {
+            // Disappear all section's element with a fadeInToOut animation            
+            titleContainerRef.current.classList.add(animations.fadeInToOut_increaseSize);   
+            sectionRef.current.classList.add(animations.fadeInToOut);
+            
+            // When previous animation ends, then LoadingScreen is displayed
             sectionRef.current.addEventListener('animationend', () => {
                 // Remove section's children
                 removeChildren(sectionRef);
                 
-                // Displays <LoadingScreen /> component with a FadeOutToIn animation
-                sectionRef.current?.classList.add(animations.fadeAppear);
-                const loadingScreenContainer = document.createElement('div');                
-                ReactDOM.render(<LoadingScreen />, loadingScreenContainer);
-                
+                // Displays <LoadingScreen /> component with a FadeOutToIn animation                                
+                ReactDOM.render(<LoadingScreen />, sectionRef.current);
+                sectionRef.current?.classList.add(animations.fadeOutToIn);                
+                                
                 // Goes to the questions page
                 router.push("/Questions");
             }, {once: true});
@@ -37,7 +39,7 @@ export default function Home() {
 
     return (
         <section className={styles.container} ref={sectionRef}>
-            <div className={styles.titleContainer}>
+            <div className={styles.titleContainer} ref={titleContainerRef}>
                 <h1>Test</h1>                
                 <h2 className={styles.title}>¿Qué tan buen estudiante sos?</h2>    
                 <button className={styles.btn} onClick={handleClick}>
