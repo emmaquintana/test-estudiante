@@ -8,7 +8,9 @@ export default function LoadingScreen() {
             alignItems: 'center',
             justifyContent: 'center',
             height: '100dvh'
-        }}>
+            }}
+            className={animations.fadeOutToIn}
+        >
             <CgSpinner 
                 className={animations.rotate} 
                 style={{
