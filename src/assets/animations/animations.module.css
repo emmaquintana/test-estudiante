@@ -1,8 +1,10 @@
 .pulse { animation: pulse infinite 2s }
-.fadeAppear { animation: fadeAppear 500ms forwards; }
-.fadeDisappear { animation: fadeDisappear 500ms forwards; }
+.fadeOutToIn { animation: fadeOutToIn 500ms forwards; }
+.fadeInToOut { animation: fadeInToOut 500ms forwards; }
 .shake { animation: shake 500ms forwards }
 .rotate { animation: rotate 1.5s infinite linear }
+.increaseSize { animation: increaseSize 1.5s forwards linear }
+.fadeInToOut_increaseSize { animation: fadeInToOut_increaseSize 500ms forwards linear }
 
 @keyframes pulse {
     0% { scale: 1; }
@@ -10,12 +12,12 @@
     100% { scale: 1; }
 }
 
-@keyframes fadeAppear {
+@keyframes fadeOutToIn {
     0% { opacity: 0; }
     100% { opacity: 1 }
 }
 
-@keyframes fadeDisappear {
+@keyframes fadeInToOut {
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
@@ -34,4 +36,20 @@
 @keyframes rotate {
     0% { transform: rotate(auto); }
     100% { transform: rotate(360deg);}
+}
+
+@keyframes increaseSize {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+}
+
+@keyframes fadeInToOut_increaseSize {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
 }
