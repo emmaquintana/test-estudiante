@@ -6,10 +6,7 @@ import animations from '../../../assets/animations/animations.module.css'
 import { useRouter } from 'next/navigation';
 import LoadingScreen from '@/assets/components/LoadingScreen';
 import React from 'react';
-import Loading from './loading';
 import { createRoot } from 'react-dom/client';
-import ReactDOM from 'react-dom';
-import removeChildren from '@/assets/util/RemoveChildren';
 
 export default function Home() {                
 
@@ -28,7 +25,11 @@ export default function Home() {
                 if (sectionRef.current) {                                        
                     // Displays <LoadingScreen /> component with a FadeOutToIn animation                                
                     createRoot(sectionRef.current).render(<LoadingScreen />);
-                    sectionRef.current?.classList.add(animations.fadeOutToIn);                
+                    
+                    // Handles fade animation
+                    sectionRef.current?.classList.remove(animations.fadeInToOut);
+                    titleContainerRef.current?.classList.remove(animations.fadeInToOut_increaseSize)                    
+                    sectionRef.current?.classList.add(animations.fadeOutToIn);                                          
 
                     // Goes to the questions page
                     router.push("/Questions");

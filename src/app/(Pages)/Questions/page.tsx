@@ -9,6 +9,9 @@ import animations from '@/assets/animations/animations.module.css'
 import WrapperText from '@/assets/components/WrapperText';
 import FloatingDialog from '@/assets/components/FloatingDialog';
 import { useRouter } from 'next/navigation';
+import { createRoot } from 'react-dom/client';
+import LoadingScreen from '@/assets/components/LoadingScreen';
+import replaceWithLoadingScreen from '@/assets/util/ReplaceWithLoadingScreen';
 
 /*
 The following test works with a score model.
@@ -18,7 +21,7 @@ classifications, there's a score (number type)
 */
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
-    const [questionId, setQuestionId] = useState(0);
+    const [questionId, setQuestionId] = useState(5);
     const [score, setScore] = useState(0);
     const [isFloatingMessageDisplayed, setIsFloatingMessageDisplayed] = useState(false);
     const sectionRef = useRef<HTMLBodyElement>(null);
@@ -68,7 +71,7 @@ export default function Home() {
 
             // Handles animation
             sectionRef.current.classList.remove(animations.fadeOutToIn);
-            sectionRef.current.classList.add(animations.fadeInToOut);
+            sectionRef.current.classList.add(animations.fadeInToOut);            
 
             sectionRef.current.addEventListener('animationend', () => {
                 if (questionId !== Questions.length - 1) {
@@ -77,7 +80,9 @@ export default function Home() {
                     setSelectedOption(null);
                 }
                 else {
-                    // End of the test: Goes to the test's result                                 
+                    // End of the test: Goes to the test's result                                                                         
+                    replaceWithLoadingScreen(sectionRef);              
+                    
                     // It works. I don't know how
                     setScore((prevScore) => {                        
                         router.push(`Questions/Result?score=${prevScore}`);
