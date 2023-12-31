@@ -21,7 +21,7 @@ classifications, there's a score (number type)
 */
 export default function Home() {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
-    const [questionId, setQuestionId] = useState(5);
+    const [questionId, setQuestionId] = useState(0);
     const [score, setScore] = useState(0);
     const [isFloatingMessageDisplayed, setIsFloatingMessageDisplayed] = useState(false);
     const sectionRef = useRef<HTMLBodyElement>(null);
