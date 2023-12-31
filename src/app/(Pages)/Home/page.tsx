@@ -4,6 +4,11 @@ import { useRef } from 'react';
 import styles from './page.module.css';
 import animations from '../../../assets/animations/animations.module.css'
 import { useRouter } from 'next/navigation';
+import LoadingScreen from '@/assets/components/LoadingScreen';
+import React from 'react';
+import Loading from './loading';
+import ReactDOM from 'react-dom';
+import removeChildren from '@/assets/util/RemoveChildren';
 
 export default function Home() {                
 
@@ -12,9 +17,19 @@ export default function Home() {
 
     function handleClick() {
         if (sectionRef.current) {
+            // Disappear all section's element with a FadeInToOut animation
             sectionRef.current.classList.add(animations.fadeDisappear);            
 
             sectionRef.current.addEventListener('animationend', () => {
+                // Remove section's children
+                removeChildren(sectionRef);
+                
+                // Displays <LoadingScreen /> component with a FadeOutToIn animation
+                sectionRef.current?.classList.add(animations.fadeAppear);
+                const loadingScreenContainer = document.createElement('div');                
+                ReactDOM.render(<LoadingScreen />, loadingScreenContainer);
+                
+                // Goes to the questions page
                 router.push("/Questions");
             }, {once: true});
         }                                
