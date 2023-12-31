@@ -67,8 +67,8 @@ export default function Home() {
             setIsFloatingMessageDisplayed(false);
 
             // Handles animation
-            sectionRef.current.classList.remove(animations.fadeAppear);
-            sectionRef.current.classList.add(animations.fadeDisappear);
+            sectionRef.current.classList.remove(animations.fadeOutToIn);
+            sectionRef.current.classList.add(animations.fadeInToOut);
 
             sectionRef.current.addEventListener('animationend', () => {
                 if (questionId !== Questions.length - 1) {
@@ -90,11 +90,11 @@ export default function Home() {
             if (questionId !== Questions.length - 1) {                
                 
                 sectionRef.current.addEventListener('animationend', () => {
-                    sectionRef.current?.classList.remove(animations.fadeDisappear);            
+                    sectionRef.current?.classList.remove(animations.fadeInToOut);            
                 }, {once: true});                
 
                 sectionRef.current.addEventListener('animationend', () => {
-                    sectionRef.current?.classList.add(animations.fadeAppear);                                
+                    sectionRef.current?.classList.add(animations.fadeOutToIn);                                
                 }, {once: true});                                    
             }            
         }
@@ -130,11 +130,11 @@ export default function Home() {
     }    
 
     return (
-        <section className={`${styles.container} ${animations.fadeAppear}`} ref={sectionRef}>
+        <section className={`${styles.container} ${animations.fadeOutToIn}`} ref={sectionRef}>
             <div>
                 <WrapperText>
                     <h2 className={styles.questionTitle}>
-                        Pregunta Nro. {questionId + 1}
+                        Pregunta Nro. {questionId + 1} / {Questions.length}
                     </h2>
                     <h3 className={styles.questionDesc}>
                         {getQuestion()}
