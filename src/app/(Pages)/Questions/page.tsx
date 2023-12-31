@@ -134,7 +134,7 @@ export default function Home() {
             <div>
                 <WrapperText>
                     <h2 className={styles.questionTitle}>
-                        Pregunta Nro. {questionId + 1} / {Questions.length}
+                        Pregunta Nro. {questionId + 1} <i>/</i> {Questions.length}
                     </h2>
                     <h3 className={styles.questionDesc}>
                         {getQuestion()}
