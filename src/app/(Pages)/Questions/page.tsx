@@ -2,14 +2,18 @@
 
 import React, { useRef, useState } from 'react';
 import NextButton from '@/assets/components/NextButton';
-import OptionButton from '@/assets/components/OptionButton';
 import { Questions } from '@/assets/util/QA';
 import styles from './page.module.css';
 import animations from '@/assets/animations/animations.module.css'
-import WrapperText from '@/assets/components/WrapperText';
 import FloatingDialog from '@/assets/components/FloatingDialog';
-import { useRouter } from 'next/navigation';
 import replaceWithLoadingScreen from '@/assets/util/ReplaceWithLoadingScreen';
+import dynamic from 'next/dynamic';
+import OptionButtonSkeleton from '@/assets/components/OptionButtonSkeleton';
+
+const OptionButton = dynamic(() => import('@/assets/components/OptionButton'), {
+    ssr: false,
+    loading: () => <OptionButtonSkeleton />
+});
 
 /*
 The following test works with a score model.
@@ -23,11 +27,10 @@ export default function Home() {
     const [score, setScore] = useState(0);
     const [isFloatingMessageDisplayed, setIsFloatingMessageDisplayed] = useState(false);
     const sectionRef = useRef<HTMLBodyElement>(null);
-    const router = useRouter();
 
     /**Handles which's the selected button for apply styles and logic*/
     function handleSelectedButton(id: number) {
-        setSelectedOption(id);        
+        setSelectedOption(id);
     }
 
     /**Returns current desc question*/
@@ -69,7 +72,7 @@ export default function Home() {
 
             // Handles animation
             sectionRef.current.classList.remove(animations.fadeOutToIn);
-            sectionRef.current.classList.add(animations.fadeInToOut);            
+            sectionRef.current.classList.add(animations.fadeInToOut);
 
             sectionRef.current.addEventListener('animationend', () => {
                 if (questionId !== Questions.length - 1) {
@@ -79,38 +82,42 @@ export default function Home() {
                 }
                 else {
                     // End of the test: Goes to the test's result                                                                         
-                    replaceWithLoadingScreen(sectionRef);              
-                    
-                    // It works. I don't know how
-                    setScore((prevScore) => {                        
-                        router.push(`Questions/Result?score=${prevScore}`);
-                        return prevScore;
-                    });                    
+                    replaceWithLoadingScreen(sectionRef);
+
+                    import('next/navigation').then(({ useRouter }) => {
+                        const router = useRouter();
+
+                        // It works. I don't know how
+                        setScore((prevScore) => {
+                            router.push(`Questions/Result?score=${prevScore}`);
+                            return prevScore;
+                        });
+                    })
                 }
-            }, {once: true});
-          
+            }, { once: true });
+
             // Handles animation. Fade out doesn't remove if it's the last question
-            if (questionId !== Questions.length - 1) {                
-                
-                sectionRef.current.addEventListener('animationend', () => {
-                    sectionRef.current?.classList.remove(animations.fadeInToOut);            
-                }, {once: true});                
+            if (questionId !== Questions.length - 1) {
 
                 sectionRef.current.addEventListener('animationend', () => {
-                    sectionRef.current?.classList.add(animations.fadeOutToIn);                                
-                }, {once: true});                                    
-            }            
+                    sectionRef.current?.classList.remove(animations.fadeInToOut);
+                }, { once: true });
+
+                sectionRef.current.addEventListener('animationend', () => {
+                    sectionRef.current?.classList.add(animations.fadeOutToIn);
+                }, { once: true });
+            }
         }
         else {
             // if there's no a selected option, then a shake animation
             // is activated during 500ms. 
             // Also, a floating dialog message is displayed.
             if (sectionRef.current) {
-                sectionRef.current.classList.add(animations.shake);                
+                sectionRef.current.classList.add(animations.shake);
 
                 sectionRef.current.addEventListener('animationend', () => {
                     sectionRef.current?.classList.remove(animations.shake);
-                }, {once: true});                
+                }, { once: true });
             }
             setIsFloatingMessageDisplayed(true)
         }
@@ -130,19 +137,17 @@ export default function Home() {
                 return prevScore;
             });
         }
-    }    
+    }
 
     return (
         <section className={`${styles.container} ${animations.fadeOutToIn}`} ref={sectionRef}>
             <div>
-                <WrapperText>
-                    <h2 className={styles.questionTitle}>
-                        Pregunta Nro. {questionId + 1} <i>/</i> {Questions.length}
-                    </h2>
-                    <h3 className={styles.questionDesc}>
-                        {getQuestion()}
-                    </h3>
-                </WrapperText>
+                <h2 className={styles.questionTitle} style={{ fontSize: 'clamp(1.5em, 2.5vw, 5em);'}}>
+                    Pregunta Nro. {questionId + 1} <i>/</i> {Questions.length}
+                </h2>
+                <h3 className={styles.questionDesc} style={{ fontSize: 'clamp(1.5em, 2.5vw, 5em);'}}>
+                    {getQuestion()}
+                </h3>
             </div>
             <div className={styles.optionButtonsContainer}>
                 {getOptions()}
