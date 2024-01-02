@@ -1,0 +1,32 @@
+.optionButton {    
+    min-width: 30em;
+    max-width: 50em;
+    padding: .6em 2em;
+    background-color: #ccc;        
+    outline: 1px solid #eee;
+    border: 0;
+    border-radius: 9999px;    
+    transition: transform .2s;    
+}
+
+.bar {
+    height: 80%;
+    width: 100%;
+}
+
+.childrenContainer {
+    display: grid;
+    grid-template-columns: auto 1fr;    
+    grid-template-rows: auto;
+    align-items: center;
+    gap: 1em;    
+}
+
+.childrenContainer > * {
+    color: #aaa;
+}
+
+.checkIcon {
+    height: 2em;
+    width: 2em;           
+}
