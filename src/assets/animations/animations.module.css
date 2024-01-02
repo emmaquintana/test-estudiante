@@ -5,6 +5,9 @@
 .rotate { animation: rotate 1.5s infinite linear }
 .increaseSize { animation: increaseSize 1.5s forwards linear }
 .fadeInToOut_increaseSize { animation: fadeInToOut_increaseSize 500ms forwards linear }
+.skeletonLoading { animation: skeletonLoading 1s linear infinite alternate; }
+.barSkeletonLoading { animation: barSkeletonLoading 1s linear infinite alternate; }
+.iconSkeletonLoading { animation: iconSkeletonLoading 1s linear infinite alternate; }
 
 @keyframes pulse {
     0% { scale: 1; }
@@ -51,5 +54,32 @@
     100% {
         transform: scale(1.2);
         opacity: 0;
+    }
+}
+
+@keyframes skeletonLoading {
+    0% {
+        background-color: #ddd;
+      }
+      100% {
+        background-color: #eee;
+    }
+}
+
+@keyframes barSkeletonLoading {
+    0% {
+        background-color: #bbb;
+    }
+    100% {
+        background-color: #eee;
+    }
+}
+
+@keyframes iconSkeletonLoading {
+    0% {
+        color: #aaa;
+    }
+    100% {
+        color: #ccc;
     }
 }
