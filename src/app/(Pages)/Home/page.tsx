@@ -5,7 +5,6 @@ import styles from './page.module.css';
 import animations from '../../../assets/animations/animations.module.css'
 import { useRouter } from 'next/navigation';
 import LoadingScreen from '@/assets/components/LoadingScreen';
-import React from 'react';
 
 export default function Home() {
 
