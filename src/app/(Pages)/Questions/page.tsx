@@ -9,6 +9,8 @@ import FloatingDialog from '@/assets/components/FloatingDialog';
 import replaceWithLoadingScreen from '@/assets/util/ReplaceWithLoadingScreen';
 import dynamic from 'next/dynamic';
 import OptionButtonSkeleton from '@/assets/components/OptionButtonSkeleton';
+import { useRouter } from 'next/navigation';
+import WrapperText from '@/assets/components/WrapperText';
 
 const OptionButton = dynamic(() => import('@/assets/components/OptionButton'), {
     ssr: false,
@@ -27,6 +29,7 @@ export default function Home() {
     const [score, setScore] = useState(0);
     const [isFloatingMessageDisplayed, setIsFloatingMessageDisplayed] = useState(false);
     const sectionRef = useRef<HTMLBodyElement>(null);
+    const router = useRouter();
 
     /**Handles which's the selected button for apply styles and logic*/
     function handleSelectedButton(id: number) {
@@ -84,15 +87,12 @@ export default function Home() {
                     // End of the test: Goes to the test's result                                                                         
                     replaceWithLoadingScreen(sectionRef);
 
-                    import('next/navigation').then(({ useRouter }) => {
-                        const router = useRouter();
+                    // It works. I don't know how
+                    setScore((prevScore) => {
+                        router.push(`Questions/Result?score=${prevScore}`);
+                        return prevScore;
+                    });
 
-                        // It works. I don't know how
-                        setScore((prevScore) => {
-                            router.push(`Questions/Result?score=${prevScore}`);
-                            return prevScore;
-                        });
-                    })
                 }
             }, { once: true });
 
@@ -142,12 +142,14 @@ export default function Home() {
     return (
         <section className={`${styles.container} ${animations.fadeOutToIn}`} ref={sectionRef}>
             <div>
-                <h2 className={styles.questionTitle} style={{ fontSize: 'clamp(1.5em, 2.5vw, 5em);'}}>
-                    Pregunta Nro. {questionId + 1} <i>/</i> {Questions.length}
-                </h2>
-                <h3 className={styles.questionDesc} style={{ fontSize: 'clamp(1.5em, 2.5vw, 5em);'}}>
-                    {getQuestion()}
-                </h3>
+                <WrapperText>
+                    <h2 className={styles.questionTitle}>
+                        Pregunta Nro. {questionId + 1} <i>/</i> {Questions.length}
+                    </h2>
+                    <h3 className={styles.questionDesc}>
+                        {getQuestion()}
+                    </h3>
+                </WrapperText>
             </div>
             <div className={styles.optionButtonsContainer}>
                 {getOptions()}
