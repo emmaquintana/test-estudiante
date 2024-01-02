@@ -9,8 +9,6 @@ import animations from '@/assets/animations/animations.module.css'
 import WrapperText from '@/assets/components/WrapperText';
 import FloatingDialog from '@/assets/components/FloatingDialog';
 import { useRouter } from 'next/navigation';
-import { createRoot } from 'react-dom/client';
-import LoadingScreen from '@/assets/components/LoadingScreen';
 import replaceWithLoadingScreen from '@/assets/util/ReplaceWithLoadingScreen';
 
 /*

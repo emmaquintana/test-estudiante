@@ -1,7 +1,6 @@
 import React from "react";
 import style from './styles/OptionButton.module.css';
 import { CiCircleCheck as Check } from "react-icons/ci";
-import animations from '../animations/animations.module.css';
 
 type OptionButtonProps = {
     id: number;

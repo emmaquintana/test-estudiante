@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from "react";
+import React from "react";
 import { FaArrowRightLong as ArrowRight } from "react-icons/fa6";
 import style from './styles/NextButton.module.css';
 import animations from '../animations/animations.module.css'
