@@ -25,7 +25,7 @@ export default function Home() {
                     if (sectionRef.current) {
                         // Displays <LoadingScreen /> component with a FadeOutToIn animation                                
                         createRoot(sectionRef.current).render(<LoadingScreen />);
-                    }                    
+                    }
 
                     // Handles fade animation
                     sectionRef.current?.classList.remove(animations.fadeInToOut);
