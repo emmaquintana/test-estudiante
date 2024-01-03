@@ -1,20 +1,49 @@
 "use client"
 
 import React, { useRef, useState } from 'react';
-import NextButton from '@/assets/components/NextButton';
-import { Questions } from '@/assets/util/QA';
+import { Questions } from '@/assets/util/Info/QA';
 import styles from './page.module.css';
 import animations from '@/assets/animations/animations.module.css'
 import FloatingDialog from '@/assets/components/FloatingDialog';
-import replaceWithLoadingScreen from '@/assets/util/ReplaceWithLoadingScreen';
+import replaceWithLoadingScreen from '@/assets/util/Functions/ReplaceWithLoadingScreen';
 import dynamic from 'next/dynamic';
 import OptionButtonSkeleton from '@/assets/components/OptionButtonSkeleton';
 import { useRouter } from 'next/navigation';
-import WrapperText from '@/assets/components/WrapperText';
+import BarSkeleton from '@/assets/components/BarSkeleton';
 
 const OptionButton = dynamic(() => import('@/assets/components/OptionButton'), {
     ssr: false,
     loading: () => <OptionButtonSkeleton />
+});
+
+const WrapperText = dynamic(() => import('@/assets/components/WrapperText'), {
+    ssr: false,
+    loading: () => {
+        return (
+            <>
+                <BarSkeleton 
+                    styles={{
+                        width: '80vw', 
+                        height: '80px', 
+                        borderRadius: '10px', 
+                        display: 'flex', 
+                        flexDirection: 'column',
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        gap: '25%',                         
+                    }}
+                >
+                    <BarSkeleton styles={{width: '95%', height: '20px', borderRadius: '10px'}} variant='ligther' />
+                    <BarSkeleton styles={{width: '95%', height: '20px', borderRadius: '10px'}} variant='ligther' />
+                </BarSkeleton>
+            </>
+        )
+    }
+});
+
+const NextButton = dynamic(() => import('@/assets/components/NextButton'), {
+    ssr: false,
+    loading: () => <BarSkeleton styles={{padding: '2rem', borderRadius: '50%'}} />
 });
 
 /*
