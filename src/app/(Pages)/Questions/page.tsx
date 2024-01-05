@@ -184,7 +184,7 @@ export default function Home() {
                 {getOptions()}
             </div>
             <NextButton
-                pulseAnimation
+                pulseAnimation={selectedOption !== null}
                 onClick={handleNextClick}
                 className={styles.nextBtn}
                 styles={selectedOption !== null ? {backgroundColor: 'rgb(12, 200, 0)', color: '#fff', transition: '.5s'} : {}}
