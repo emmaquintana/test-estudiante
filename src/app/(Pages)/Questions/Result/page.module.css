@@ -46,4 +46,5 @@
 
 .btn {
     font-size: 1px;
+    -webkit-tap-highlight-color: transparent;    
 }

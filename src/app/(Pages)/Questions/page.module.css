@@ -21,7 +21,8 @@
 .optionButtons {
     width: 100%;
     line-height: 2em;
-    letter-spacing: .015em;    
+    letter-spacing: .015em;          
+    -webkit-tap-highlight-color: transparent;    
 }
 
 .controlButtonsContainer {
@@ -37,6 +38,8 @@
     bottom: 2em;
     left: 2em;
 }
+
+.nextBtn { -webkit-tap-highlight-color: transparent; }
 
 .questionTitle, .questionDesc { text-align: center; }
 .questionTitle { font-weight: bold; }

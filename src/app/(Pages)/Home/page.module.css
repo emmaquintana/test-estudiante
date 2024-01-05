@@ -39,6 +39,8 @@
     cursor: pointer;
     transition: .2s transform, .2s filter, .2s outline;
     text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;    
 }
 
 .btn:active {
