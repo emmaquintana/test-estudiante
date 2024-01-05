@@ -1,5 +1,5 @@
-import getMaximumQuestionsScore from "./MaximumScore";
-import getMinimumQuestionsScore from "./MinimumScore";
+import getMaximumQuestionsScore from "./GetMaximumScore";
+import getMinimumQuestionsScore from "./GetMinimumScore";
 
 export default function getRanges(rangesQuantity : number) : number[][] {
     
