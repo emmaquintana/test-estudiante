@@ -166,7 +166,7 @@ export default function Home() {
                 return prevScore;
             });
         }
-    }
+    }    
 
     return (
         <section className={`${styles.container} ${animations.fadeOutToIn}`} ref={sectionRef}>
@@ -187,6 +187,7 @@ export default function Home() {
                 pulseAnimation
                 onClick={handleNextClick}
                 className={styles.nextBtn}
+                styles={selectedOption !== null ? {backgroundColor: 'rgb(12, 200, 0)', color: '#fff', transition: '.5s'} : {}}
             />
             <div className={styles.floatingDialogContainer}>
                 {isFloatingMessageDisplayed &&
