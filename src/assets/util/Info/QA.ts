@@ -54,7 +54,7 @@ export const Questions: Question[] = [
             },
             {
                 id: 2,
-                desc: 'Sip, siempre',
+                desc: 'Sip, siempre, aunque tenga otras actividades que atender',
                 score: 5
             },
             {
@@ -91,7 +91,7 @@ export const Questions: Question[] = [
         options: [
             {
                 id: 1,
-                desc: 'Escucho música relajante',
+                desc: 'Escucho música relajante, aunque me distraiga un poco.',
                 score: 5
             },
             {
