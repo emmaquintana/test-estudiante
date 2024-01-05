@@ -1,5 +1,6 @@
 export type Result = {
     id?: number;
-    desc: string | number;
+    title?: string
+    desc?: string | number;
     imgSrc?: string;
 }
