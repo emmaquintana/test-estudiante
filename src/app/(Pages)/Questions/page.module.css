@@ -52,3 +52,15 @@
         left: auto;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .optionButtonsContainer {
+        transform: scale(.8);
+    }
+}
+
+@media screen and (max-width: 310px) {
+    .optionButtonsContainer {
+        transform: scale(.7);
+    }
+}
