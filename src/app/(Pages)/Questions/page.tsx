@@ -186,6 +186,7 @@ export default function Home() {
             <NextButton
                 pulseAnimation
                 onClick={handleNextClick}
+                className={styles.nextBtn}
             />
             <div className={styles.floatingDialogContainer}>
                 {isFloatingMessageDisplayed &&
