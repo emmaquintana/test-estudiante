@@ -1,40 +1,42 @@
-# Student Test
+# Test de Estudiantes
 
-This project provides a flexible student test system, designed to be easily customizable for different questions, answers, and evaluation models. **Note:** The current version is in Spanish only.
+Este proyecto ofrece un sistema de evaluación para estudiantes **flexible y personalizable**, diseñado para adaptarse fácilmente a distintos tipos de preguntas, respuestas y modelos de evaluación.  
 
-## How It Works
+## Cómo funciona
 
-This test uses a **score-based model**, meaning there are no strictly "correct" answers. Instead, each answer is classified as:
+El test utiliza un **modelo basado en puntaje**, lo que significa que no existen respuestas estrictamente “correctas”.  
+En su lugar, cada respuesta se clasifica en una de las siguientes categorías:
 
-- **Perfect**
+- **Perfecta**
 - **Regular**
-- **Bad**
+- **Mala**
 
-Each classification is associated with a score. At the end of the test, a total score is calculated and used to determine the final result.
+Cada categoría tiene un valor asociado.  
+Al finalizar el test, se calcula un **puntaje total** que determina el **resultado final**.
 
-## Flexibility & Customization
+## Flexibilidad y personalización
 
-You can modify this project without needing to write new logic or functions — unless you want to change how the test model works.
+Puedes modificar este proyecto sin necesidad de escribir nueva lógica ni funciones —  
+a menos que desees cambiar el funcionamiento interno del modelo del test.
 
-### What you can modify easily:
-- Questions
-- Answers
-- Results
+### Elementos fácilmente modificables
 
-These are located in:
-- `src/assets/util/Info/`
+- Preguntas  
+- Respuestas  
+- Resultados  
 
-If you want to add images to questions or answers, you'll need to update the type definitions:
-- `src/assets/util/Types/Question.ts`
-- `src/assets/util/Types/Answer.ts`
+Estos archivos se encuentran en:
+- src/assets/util/Info/
 
-### What requires deeper changes:
+Si deseas agregar imágenes a las preguntas o respuestas, deberás actualizar las definiciones de tipo en:
+- src/assets/util/Types/Question.ts
+- src/assets/util/Types/Answer.ts
 
-If you want to change the test logic (i.e. the test model), you will need to edit the following files:
 
-- `src/assets/util/Functions/getResult.ts`
-- `src/assets/util/Info/QA.ts`
-- `src/(Pages)/Questions/page.tsx`
-- `src/(Pages)/Questions/Result/page.tsx`
+### Cambios que requieren modificaciones más profundas
 
-> These changes require both TypeScript and React knowledge.
+Si tu intención es alterar la **lógica del test** (es decir, cómo se evalúan y calculan los resultados), deberás editar los siguientes archivos:
+- src/assets/util/Functions/getResult.ts
+- src/assets/util/Info/QA.ts
+- src/(Pages)/Questions/page.tsx
+- src/(Pages)/Questions/Result/page.tsx
